@@ -12,6 +12,8 @@ const appRouter = router({
     const title = options.input.title;
     const description = options.input.description;
 
+    console.log("from server");
+
     return {
       id: "1",
       msg: "successfully created todo",
@@ -19,10 +21,10 @@ const appRouter = router({
   }),
 });
 
-export type AppRouter = typeof appRouter;
-
 const server = createHTTPServer({
   router: appRouter,
 });
 
 server.listen(3000);
+
+export type AppRouter = typeof appRouter;
