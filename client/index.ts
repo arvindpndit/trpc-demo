@@ -22,4 +22,13 @@ async function main() {
   console.log(response);
 }
 
-main();
+async function main2() {
+  const response = await trpc.signUp.mutate({
+    email: "trpc@arvind.com",
+    password: "learning1234",
+  });
+
+  console.log(response);
+}
+
+main2();

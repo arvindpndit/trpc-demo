@@ -7,6 +7,11 @@ const inputTodoType = z.object({
   description: z.string(),
 });
 
+const inputUserSignupType = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
 const appRouter = router({
   createTodo: publicProcedure.input(inputTodoType).mutation(async (options) => {
     const title = options.input.title;
@@ -19,10 +24,31 @@ const appRouter = router({
       msg: "successfully created todo",
     };
   }),
+
+  signUp: publicProcedure.input(inputUserSignupType).mutation(async (opts) => {
+    let email = opts.input.email;
+    let password = opts.input.password;
+
+    //database jazz here
+    //authenticatio
+
+    return {
+      email: email,
+      password: password,
+      token: "dlfjk;lsdjfkdjflksdjf2",
+    };
+  }),
 });
 
 const server = createHTTPServer({
   router: appRouter,
+  createContext(opts) {
+    let authHeader = opts.req.headers["autherization"];
+    console.log(authHeader);
+    return {
+      username: "arvind@a.com",
+    };
+  },
 });
 
 server.listen(3000);
